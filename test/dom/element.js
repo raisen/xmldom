@@ -77,6 +77,17 @@ wows.describe('XML Namespace Parse').addBatch({
        console.assert(doc.getElementById('a2').getAttribute('title')=="2",doc.getElementById('a2'));
        console.assert(doc.getElementById('a2').getAttribute('title2')=="",doc.getElementById('a2'));
     },
+    'getElementsByClassName': function () { 
+       var doc = new DOMParser().parseFromString('<html><body>' +
+        '<div class="test">hello</div>' +
+        '<div class="test abc">hello</div>' +
+        '<div class="my test abc">hello</div>' +
+        '</body></html>', 'text/html');
+       console.assert(doc.getElementsByClassName('test').length ==1);
+       console.assert(doc.getElementsByClassName('test abc').length == 1);
+       console.assert(doc.getElementsByClassName('abc test').length == 0);
+       console.assert(doc.getElementsByClassName('my test abc').length ==1);
+    },
     "append exist child":function(){
        var doc = new DOMParser().parseFromString('<xml xmlns="http://test.com" id="root">' +
        		'<child1 id="a1" title="1"><child11 id="a2"  title="2"/></child1>' +

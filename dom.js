@@ -602,6 +602,17 @@ Document.prototype = {
 		})
 		return rtv;
 	},
+	getElementsByClassName :	function(class_name){
+		var ls = [];
+		_visitNode(this.documentElement,function(node){
+			if(node.nodeType == 1){
+				if(node.getAttribute('class') == class_name){
+					ls.push(node);
+				}
+			}
+		})
+		return ls;
+	},
 	
 	//document factory method:
 	createElement :	function(tagName){
